@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
     public void PressSolo() {
-        SceneManager.LoadScene("SoloMapSelection");
+        SceneManager.LoadScene("MapSelection");
     }
 
     public void PressMultiplayer() {
