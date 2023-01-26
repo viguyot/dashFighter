@@ -6,13 +6,21 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour {
 
-    public AudioMixer audioMixer;
+    [SerializeField]
+    private AudioMixer audioMixer;
 
-    public Dropdown resolutionDropdown;
+    [SerializeField]
+    private Slider slider;
+
+    [SerializeField]
+    private Dropdown resolutionDropdown;
 
     Resolution[] resolutions;
 
     void Start() {
+        
+        slider.value = PlayerPrefs.GetFloat("VolumeSave");
+        
         resolutions = Screen.resolutions;
 
         resolutionDropdown.ClearOptions();
@@ -51,5 +59,13 @@ public class SettingsMenu : MonoBehaviour {
     public void setResolution(int resolutionIndex) {
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+
+    public void SaveOptions()
+    {
+        float value;
+        audioMixer.GetFloat("volume", out value);
+        PlayerPrefs.SetFloat("VolumeSave", value);
+        PlayerPrefs.Save();
     }
 }
