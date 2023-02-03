@@ -20,6 +20,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private bool isOnGround = false;
 
+
+    [Header("Dash")]
+    [SerializeField]
+    private float dashForce;
+    [SerializeField]
+    private string lastKeyDash;
+    [SerializeField]
+    private bool isDashing = false;
+
+    
+    [Header("Flash")]
+    [SerializeField]
+    private float flashDistance;
     [SerializeField]
     private string lastKeyFlash;
     [SerializeField]
@@ -53,6 +66,10 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey("down")) {
             playerRb.AddForce(new Vector2(0f, fallingSpeed));
         }
+
+        // Dash section
+
+        prepareToDash();
 
         // Flash section
         
@@ -90,9 +107,42 @@ public class PlayerMovement : MonoBehaviour
         isOnGround = true;
     }
 
-    // Dash
+    // Dash section
 
-    // Flash
+    void prepareToDash() {
+        if (Input.GetKeyDown(KeyCode.A)) {
+            isDashing = true;
+        }
+
+        if(Input.GetKey(KeyCode.UpArrow)){
+            lastKeyDash = "UpArrow";
+        }else if(Input.GetKey(KeyCode.RightArrow)){
+            lastKeyDash = "RightArrow";
+        }else if(Input.GetKey(KeyCode.DownArrow)){
+            lastKeyDash = "DownArrow";
+        }else if(Input.GetKey(KeyCode.LeftArrow)){
+            lastKeyDash = "LeftArrow";
+        }
+
+        Dash();
+    }
+
+    void Dash() {
+        if (isDashing) { 
+            if(lastKeyDash == "UpArrow") {
+                playerRb.AddForce(new Vector2(0, dashForce));
+            } else if (lastKeyDash == "RightArrow") {
+                playerRb.AddForce(new Vector2(dashForce*10, 0));
+            } else if (lastKeyDash == "DownArrow") {
+                playerRb.AddForce(new Vector2(0, -dashForce));
+            } else if (lastKeyDash == "LeftArrow") {
+                playerRb.AddForce(new Vector2(-dashForce*10, 0));
+            }
+            isDashing = false; 
+        }
+    }
+
+    // Flash section
 
     void prepareToFlash() {
         if (Input.GetKeyDown(KeyCode.Z)) {
@@ -110,18 +160,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Flash()
     {
-        if(isFlashing)
-        { 
+        if (isFlashing) { 
             if (lastKeyFlash == "RightArrow") {
-                transform.position = (new Vector3(transform.position.x + 4, transform.position.y, transform.position.z));
+                transform.position = (new Vector3(transform.position.x + flashDistance, transform.position.y, transform.position.z));
             } else if (lastKeyFlash == "LeftArrow") {
-                transform.position = (new Vector3(transform.position.x - 4, transform.position.y, transform.position.z));
+                transform.position = (new Vector3(transform.position.x - flashDistance, transform.position.y, transform.position.z));
             }
 
             isFlashing = false; 
         }
     }
-
-    // Shield
-    // Grab
 }
