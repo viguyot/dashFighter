@@ -13,13 +13,7 @@ public class CameraFollow : MonoBehaviour
     public float offsetSmoothing;
 
     private Vector3 targetPosition;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
         Vector3 centerPoint = (player1.transform.position + player2.transform.position) / 2;
@@ -32,9 +26,9 @@ public class CameraFollow : MonoBehaviour
 
         Camera.main.orthographicSize = distance * offset;
 
-        if(Camera.main.orthographicSize < 6f)
+        if(Camera.main.orthographicSize < 4f)
         {
-            Camera.main.orthographicSize = 6f;
+            Camera.main.orthographicSize = 4f;
         }
         else if (Camera.main.orthographicSize > 10f)
         {
