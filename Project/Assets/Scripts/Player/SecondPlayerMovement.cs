@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class SecondPlayerMovement : MonoBehaviour
 {
     public Rigidbody2D playerRb;
 
@@ -61,11 +61,11 @@ public class PlayerMovement : MonoBehaviour
 
         float horizontalMovement;
 
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.J))
         {
             horizontalMovement = Vector3.left.x * moveSpeed * Time.fixedDeltaTime;
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.L))
         {
             horizontalMovement = Vector3.right.x * moveSpeed * Time.fixedDeltaTime;
         }
@@ -76,14 +76,14 @@ public class PlayerMovement : MonoBehaviour
 
         // Jump section
 
-        if ((Input.GetKey(KeyCode.Z)) && isOnGround)
+        if ((Input.GetKey(KeyCode.I)) && isOnGround)
         {
             isJumping = true;
         }
 
         // Fast fall
 
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.K))
         {
             playerRb.AddForce(new Vector2(0f, fallingSpeed));
         }
@@ -143,19 +143,19 @@ public class PlayerMovement : MonoBehaviour
 
     void prepareToDash()
     {
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKey(KeyCode.I))
         {
             lastKeyDash = "UpArrow";
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.L))
         {
             lastKeyDash = "RightArrow";
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.K))
         {
             lastKeyDash = "DownArrow";
         }
-        else if (Input.GetKey(KeyCode.Q))
+        else if (Input.GetKey(KeyCode.J))
         {
             lastKeyDash = "LeftArrow";
         }
@@ -165,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Dash()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             if (lastKeyDash == "UpArrow")
             {
@@ -190,11 +190,11 @@ public class PlayerMovement : MonoBehaviour
 
     void prepareToFlash()
     {
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey("right"))
         {
             lastKeyFlash = "RightArrow";
         }
-        else if (Input.GetKey(KeyCode.Q))
+        else if (Input.GetKey("left"))
         {
             lastKeyFlash = "LeftArrow";
         }
@@ -204,7 +204,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Flash()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             if (lastKeyFlash == "RightArrow")
             {
@@ -239,24 +239,24 @@ public class PlayerMovement : MonoBehaviour
 
     void prepareToGrab()
     {
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKey(KeyCode.I))
         {
             lastKeyGrab = "UpArrow";
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.L))
         {
             lastKeyGrab = "RightArrow";
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.K))
         {
             lastKeyGrab = "DownArrow";
         }
-        else if (Input.GetKey(KeyCode.Q))
+        else if (Input.GetKey(KeyCode.J))
         {
             lastKeyGrab = "LeftArrow";
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             if (!isGrabbing)
             {

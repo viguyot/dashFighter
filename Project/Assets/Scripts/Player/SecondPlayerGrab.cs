@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGrab : MonoBehaviour
+public class SecondPlayerGrab : MonoBehaviour
 {
     [SerializeField]
     private float grabRadius;
@@ -21,24 +21,24 @@ public class PlayerGrab : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.I))
         {
             lastKeyGrab = "UpArrow";
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.L))
         {
             lastKeyGrab = "RightArrow";
         }
-        else if (Input.GetKey(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.K))
         {
             lastKeyGrab = "DownArrow";
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.J))
         {
             lastKeyGrab = "LeftArrow";
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             if (!isGrabbing)
             {
