@@ -49,7 +49,7 @@ public class PlayerGrab : MonoBehaviour
                     if (collider.gameObject.tag == "Player" && collider.gameObject != gameObject)
                     {
                         grabbedBody = collider.GetComponent<Rigidbody2D>();
-                        grabbedBody.bodyType = RigidbodyType2D.Kinematic;
+                        grabbedBody.bodyType = RigidbodyType2D.Static;
                         isGrabbing = true;
                         break;
                     }

@@ -231,12 +231,6 @@ public class SecondPlayerMovement : MonoBehaviour
 
     // Grab section
 
-    /*void prepareToGrab() {
-        if (Input.GetKeyDown(KeyCode.R) && canGrab) {
-            Debug.Log("Grab effectué");
-        }
-    }*/
-
     void prepareToGrab()
     {
         if (Input.GetKey(KeyCode.I))
@@ -267,7 +261,8 @@ public class SecondPlayerMovement : MonoBehaviour
                     if (collider.gameObject.tag == "Player" && collider.gameObject != gameObject)
                     {
                         grabbedBody = collider.GetComponent<Rigidbody2D>();
-                        grabbedBody.bodyType = RigidbodyType2D.Kinematic;
+                        grabbedBody.bodyType = RigidbodyType2D.Static;
+                        playerRb.bodyType = RigidbodyType2D.Static;
                         isGrabbing = true;
                         break;
                     }
@@ -277,6 +272,7 @@ public class SecondPlayerMovement : MonoBehaviour
             {
                 // Relâcher le joueur attrapé
                 grabbedBody.bodyType = RigidbodyType2D.Dynamic;
+                playerRb.bodyType = RigidbodyType2D.Dynamic;
                 if (lastKeyGrab == "UpArrow")
                 {
                     grabbedBody.AddForce(new Vector2(0, throwForce));
