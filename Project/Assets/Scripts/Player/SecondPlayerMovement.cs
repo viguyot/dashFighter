@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class SecondPlayerMovement : MonoBehaviour {
     private Rigidbody2D playerRb;
@@ -23,7 +24,13 @@ public class SecondPlayerMovement : MonoBehaviour {
     [SerializeField] private Rigidbody2D grabbedBody;
     [SerializeField] private bool isGrabbing;
     [SerializeField] private string lastKeyGrab;
+    
+    [Header("Health")]
+    [SerializeField] private HealthBar healthBar;
 
+    [Header("Energy")]
+    [SerializeField] private EnergyBar energyBar;
+    
     void Start() {
         animator = GetComponent<Animator>();
         playerRb = GetComponent<Rigidbody2D>();
@@ -34,9 +41,9 @@ public class SecondPlayerMovement : MonoBehaviour {
         // Move Horizontaly
         float horizontalMovement;
 
-        if (Input.GetKey(KeyCode.J)) {
+        if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("LeftButton2")))) {
             horizontalMovement = Vector3.left.x * moveSpeed * Time.fixedDeltaTime;
-        } else if (Input.GetKey(KeyCode.L)) {
+        } else if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("RightButton2")))) {
             horizontalMovement = Vector3.right.x * moveSpeed * Time.fixedDeltaTime;
         } else {
             horizontalMovement = 0;
@@ -50,7 +57,7 @@ public class SecondPlayerMovement : MonoBehaviour {
         animator.SetFloat("AirSpeed", playerRb.velocity.y);
 
         // Jump section
-        if ((Input.GetKey(KeyCode.I)) && isOnGround) {
+        if ((Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("JumpButton2")))) && isOnGround) {
             animator.SetTrigger("Jump");
             isOnGround = false;
             animator.SetBool("Grounded", isOnGround);
@@ -59,7 +66,7 @@ public class SecondPlayerMovement : MonoBehaviour {
         }
 
         // Fast fall
-        if (Input.GetKey(KeyCode.K)) {
+        if (Input.GetKey((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("DownButton2")))) {
             playerRb.AddForce(new Vector2(0f, fallingSpeed));
         }
 
@@ -111,20 +118,20 @@ public class SecondPlayerMovement : MonoBehaviour {
 
     // Dash section
     void prepareToDash() {
-        if (Input.GetKey(KeyCode.I)) {
+        if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("JumpButton2")))) {
             lastKeyDash = "UpArrow";
-        } else if (Input.GetKey(KeyCode.L)) {
+        } else if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("RightButton2")))) {
             lastKeyDash = "RightArrow";
-        } else if (Input.GetKey(KeyCode.K)) {
+        } else if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("DownButton2")))) {
             lastKeyDash = "DownArrow";
-        } else if (Input.GetKey(KeyCode.J)) {
+        } else if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("LeftButton2")))) {
             lastKeyDash = "LeftArrow";
         }
         Dash();
     }
 
     void Dash() {
-        if (Input.GetKeyDown(KeyCode.U)) {
+        if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("DashButton2")))) {
             if (lastKeyDash == "UpArrow") {
                 playerRb.AddForce(new Vector2(0, dashForce));
             } else if (lastKeyDash == "RightArrow") {
@@ -137,26 +144,32 @@ public class SecondPlayerMovement : MonoBehaviour {
         }
     }
 
-    // Quick Attack section
+    // Attack section
     void QuickAttack() {
-        if (Input.GetKeyDown(KeyCode.O)) {
+        if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("AttackButton2")))) {
             animator.SetTrigger("Attack");
+        }
+    }
+
+    void StrongAttack() {
+        if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("ChargeButton2")))) {
+            Debug.Log("StrongAttack");
         }
     }
 
     // Grab section
     void prepareToGrab() {
-        if (Input.GetKey(KeyCode.I)) {
+        if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("JumpButton2")))) {
             lastKeyGrab = "UpArrow";
-        } else if (Input.GetKey(KeyCode.L)) {
+        } else if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("RightButton2")))) {
             lastKeyGrab = "RightArrow";
-        } else if (Input.GetKey(KeyCode.K)) {
+        } else if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("DownButton2")))) {
             lastKeyGrab = "DownArrow";
-        } else if (Input.GetKey(KeyCode.J)) {
+        } else if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("LeftButton2")))) {
             lastKeyGrab = "LeftArrow";
         }
 
-        if (Input.GetKeyDown(KeyCode.M)) {
+        if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("GrabButton2")))) {
             if (!isGrabbing) {
                 // Vérifiez s'il y a un joueur proche pour être attrapé
                 Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, grabRadius);
