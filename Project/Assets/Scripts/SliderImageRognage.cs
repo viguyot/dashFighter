@@ -15,8 +15,6 @@ public class SliderImageRognage : MonoBehaviour
         {
             float normalizedValue = slider.normalizedValue;
 
-            Debug.Log("normalizedValue: " + normalizedValue);
-
             if (normalizedValue == 0)
             {
                 img1.gameObject.SetActive(false);
