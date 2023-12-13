@@ -39,6 +39,8 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 56e9cb016d8b8f545a66cfd614eccbf3, type: 3}
+  - {fileID: 21300000, guid: 56accfc12fd9a444385eb18677c4d9fc, type: 3}
   - {fileID: -1754427117, guid: bbc99b425ca6eb44583e54d47675926f, type: 3}
   - {fileID: -50660476, guid: bbc99b425ca6eb44583e54d47675926f, type: 3}
   - {fileID: -731123649, guid: bbc99b425ca6eb44583e54d47675926f, type: 3}
@@ -128,6 +130,9 @@ SpriteAtlas:
   - {fileID: 1610788335, guid: bbc99b425ca6eb44583e54d47675926f, type: 3}
   - {fileID: 853487624, guid: bbc99b425ca6eb44583e54d47675926f, type: 3}
   - {fileID: -159076914, guid: bbc99b425ca6eb44583e54d47675926f, type: 3}
+  - {fileID: 21300000, guid: 020d0b720c3d54b47a8bf01c8e86283b, type: 3}
+  - {fileID: 21300000, guid: a3e902156ca25484b88f33ab69210e6f, type: 3}
+  - {fileID: 21300000, guid: 98d15db5f351593438ad848aea1d03ff, type: 3}
   - {fileID: 21300000, guid: 1b48f9066ed07b7489a69b297ff6e99b, type: 3}
   - {fileID: 21300000, guid: b8a72c56398a5554394f1a358f1aefe2, type: 3}
   - {fileID: 21300000, guid: d3bb40972bc912c4aba638bec2150425, type: 3}
@@ -608,8 +613,11 @@ SpriteAtlas:
   - {fileID: 21300256, guid: bf56f30c2e551f64fbee451ddd13fc45, type: 3}
   - {fileID: 21300320, guid: bf56f30c2e551f64fbee451ddd13fc45, type: 3}
   - {fileID: 21300260, guid: bf56f30c2e551f64fbee451ddd13fc45, type: 3}
+  - {fileID: 21300000, guid: 59275d5cbcac1fa4786f8c0e1af26835, type: 3}
   - {fileID: 21300000, guid: 6239d47db00f01947933ee3858d68477, type: 3}
   m_PackedSpriteNamesToIndex:
+  - "Barre d'\xE9nergie contenu"
+  - Pile de vie
   - ForestPack2_42
   - ForestPack2_43
   - ForestPack2_40
@@ -699,6 +707,9 @@ SpriteAtlas:
   - ForestPack2_83
   - ForestPack2_80
   - ForestPack2_81
+  - "Pile d'\xE9nergie"
+  - Barre de vie encadrement
+  - Barre de vie contenu
   - SwampPack2
   - TaigaPack1
   - "Barre d'\xE9nergie"
@@ -1179,6 +1190,7 @@ SpriteAtlas:
   - Medieval_tiles_free2_128
   - Medieval_tiles_free2_160
   - Medieval_tiles_free2_130
+  - "Barre d'\xE9nergie encadrement"
   - SwampPack1
   m_RenderDataMap: {}
   m_Tag: Atlas
