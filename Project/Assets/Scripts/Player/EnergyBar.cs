@@ -34,12 +34,21 @@ public class EnergyBar : MonoBehaviour
     public void ReduceEnergy(float quantity)
     {
         actualEnergy -= quantity;
+        if (actualEnergy < 0)
+            actualEnergy = 0;
         UpdateEnergyBar();
     }
 
     public void AddEnergy(float quantity)
     {
         actualEnergy += quantity;
+        if (actualEnergy > maxEnergy)
+            actualEnergy = maxEnergy;
         UpdateEnergyBar();
+    }
+
+    public float GetEnergy()
+    {
+        return actualEnergy;
     }
 }

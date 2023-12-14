@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour {
 
     [Header("Energy")]
     [SerializeField] private EnergyBar energyBar;
+    [SerializeField] private float energyReload;
     
     void Start() {
         animator = GetComponent<Animator>();
@@ -87,12 +88,10 @@ public class PlayerMovement : MonoBehaviour {
 
         if (Mathf.Abs(horizontalMovement) > Mathf.Epsilon)
             animator.SetInteger("AnimState", 2);
-        //Combat Idle
         else
             animator.SetInteger("AnimState", 1);
-        /*//Idle
-        else
-            animator.SetInteger("AnimState", 0);*/
+
+        energyBar.AddEnergy(energyReload);
     }
 
     void MovePlayer(float _horizontalMovement) {
@@ -131,7 +130,8 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Dash() {
-        if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("DashButton")))) {
+        if (Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("DashButton")))
+            && energyBar.GetEnergy() >= 50) {
             if (lastKeyDash == "UpArrow") {
                 playerRb.AddForce(new Vector2(0, dashForce));
             } else if (lastKeyDash == "RightArrow") {
@@ -141,6 +141,8 @@ public class PlayerMovement : MonoBehaviour {
             } else if (lastKeyDash == "LeftArrow") {
                 playerRb.AddForce(new Vector2(-dashForce * 10, 0));
             }
+            energyBar.ReduceEnergy(50);
+            Debug.Log(energyBar.GetEnergy());
         }
     }
 

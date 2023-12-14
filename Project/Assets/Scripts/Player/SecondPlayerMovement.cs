@@ -30,6 +30,7 @@ public class SecondPlayerMovement : MonoBehaviour {
 
     [Header("Energy")]
     [SerializeField] private EnergyBar energyBar;
+    [SerializeField] private float energyReload;
     
     void Start() {
         animator = GetComponent<Animator>();
@@ -87,12 +88,10 @@ public class SecondPlayerMovement : MonoBehaviour {
 
         if (Mathf.Abs(horizontalMovement) > Mathf.Epsilon)
             animator.SetInteger("AnimState", 2);
-        //Combat Idle
         else
             animator.SetInteger("AnimState", 1);
-        /*//Idle
-        else
-            animator.SetInteger("AnimState", 0);*/
+            
+        energyBar.AddEnergy(energyReload);
     }
 
     void MovePlayer(float _horizontalMovement) {

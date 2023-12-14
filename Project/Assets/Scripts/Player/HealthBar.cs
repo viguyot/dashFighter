@@ -34,12 +34,21 @@ public class HealthBar : MonoBehaviour
     public void ReduceHealth(float quantity)
     {
         actualHealth -= quantity;
+        if (actualHealth < 0)
+            actualHealth = 0;
         UpdateHealthBar();
     }
 
     public void AddHealth(float quantity)
     {
         actualHealth += quantity;
+        if (actualHealth > maxHealth)
+            actualHealth = maxHealth;
         UpdateHealthBar();
+    }
+
+    public float GetHealth()
+    {
+        return actualHealth;
     }
 }
